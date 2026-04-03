@@ -5,16 +5,29 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microservicios.app.common.controllers.CommonController;
+import com.microservicios.app.futfem.teams.controllers.dto.TeamLookupRequest;
 import com.microservicios.app.futfem.teams.models.entity.Team;
 import com.microservicios.app.futfem.teams.services.TeamService;
 
 @RestController
 public class TeamController extends CommonController<Team, TeamService> {
+
+	@PostMapping("/getIdByName")
+	public ResponseEntity<?> getIdByName(@RequestBody TeamLookupRequest request) {
+		Optional<Team> team = service.findByNameContainingAndCountry(request.getName(), request.getCountry());
+
+		if (team.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok(team.get().getId());
+	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<?> editar(@RequestBody Team team, @PathVariable Long id){
