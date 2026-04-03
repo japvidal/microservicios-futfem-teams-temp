@@ -20,7 +20,11 @@ public class TeamController extends CommonController<Team, TeamService> {
 
 	@PostMapping("/getIdByName")
 	public ResponseEntity<?> getIdByName(@RequestBody TeamLookupRequest request) {
-		Optional<Team> team = service.findByNameContainingAndCountry(request.getName(), request.getCountry());
+		Optional<Team> team = service.findByNameContainingAndCountry(
+			request.getName(),
+			request.getNickname(),
+			request.getCountry()
+		);
 
 		if (team.isEmpty()) {
 			return ResponseEntity.notFound().build();

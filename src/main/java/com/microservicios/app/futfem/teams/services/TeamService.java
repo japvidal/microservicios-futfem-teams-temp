@@ -7,5 +7,5 @@ import com.microservicios.app.futfem.teams.models.entity.Team;
 
 public interface TeamService extends CommonService<Team> {
 
-	Optional<Team> findByNameContainingAndCountry(String name, String country);
+	Optional<Team> findByNameContainingAndCountry(String name, String nickname, String country);
 }
