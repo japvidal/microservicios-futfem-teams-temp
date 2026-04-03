@@ -30,7 +30,7 @@ public class TeamServiceImpl extends CommonServiceImpl<Team, TeamRepository> imp
 	}
 
 	private String normalize(String value) {
-		log.debug("Init method TeamServiceImpl.normalize");
+		log.info("Init method TeamServiceImpl.normalize");
 		if (value == null) {
 			return null;
 		}
