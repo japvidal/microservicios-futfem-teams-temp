@@ -1,6 +1,7 @@
 package com.microservicios.app.futfem.teams.models.entity;
 
 import java.util.Date;
+import java.util.Locale;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,7 +40,7 @@ public class Team {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = upper(name);
 	}
 
 	public String getCountry() {
@@ -47,7 +48,7 @@ public class Team {
 	}
 
 	public void setCountry(String country) {
-		this.country = country;
+		this.country = upper(country);
 	}
 
 	public Date getEstablished() {
@@ -63,7 +64,7 @@ public class Team {
 	}
 
 	public void setNickname(String nickname) {
-		this.nickname = nickname;
+		this.nickname = upper(nickname);
 	}
 
 	public String getUrlpic() {
@@ -80,6 +81,10 @@ public class Team {
 
 	public void setUrlshirt(String urlshirt) {
 		this.urlshirt = urlshirt;
+	}
+
+	private String upper(String value) {
+		return value == null ? null : value.toUpperCase(Locale.ROOT);
 	}
 
 }
